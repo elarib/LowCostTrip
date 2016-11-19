@@ -5,7 +5,7 @@
         .module('lowCostTripApp')
         .controller('HotelReservationDialogController', HotelReservationDialogController);
 
-    HotelReservationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'HotelReservation', 'User'];
+    HotelReservationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'HotelReservation','User'];
 
     function HotelReservationDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, HotelReservation, User) {
         var vm = this;
@@ -26,6 +26,9 @@
         }
 
         function save () {
+            console.log(vm.hotelReservation);
+
+            vm.hotelReservation.user = vm.users[vm.users.length - 1];
             vm.isSaving = true;
             if (vm.hotelReservation.id !== null) {
                 HotelReservation.update(vm.hotelReservation, onSaveSuccess, onSaveError);
