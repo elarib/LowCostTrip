@@ -78,7 +78,7 @@ public class HotelReservationResource {
         if (hotelReservation.getId() == null) {
             return createHotelReservation(hotelReservation);
         }
-        HotelReservation result = hotelReservationRepository.save(hotelReservation);
+        HotelReservation result = hotelReservationRepository.save(hotelReservation.user(userService.getUserWithAuthorities()));
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("hotelReservation", hotelReservation.getId().toString()))
             .body(result);

@@ -6,7 +6,9 @@
 
     <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20161119175639_added_entity_HotelReservation.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161119190947_added_entity_RestaurantReservation.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20161119175639_added_entity_constraints_HotelReservation.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20161119190947_added_entity_constraints_RestaurantReservation.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

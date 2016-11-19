@@ -26,7 +26,6 @@
         }
 
         function save () {
-            console.log(vm.hotelReservation);
 
             vm.hotelReservation.user = vm.users[vm.users.length - 1];
             vm.isSaving = true;

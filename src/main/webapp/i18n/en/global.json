@@ -8,6 +8,7 @@
             "entities": {
                 "main": "Entities",
                 "hotelReservation": "Hotel Reservation",
+                "restaurantReservation": "Restaurant Reservation",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
