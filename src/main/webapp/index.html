@@ -27,13 +27,13 @@
     <page-ribbon></page-ribbon>
     <div ui-view="navbar" ng-cloak></div>
     <div ng-controller="checkCtrl">
-        <label ng-repeat="role in roles">
-            <input type="checkbox" checklist-model="user.roles" checklist-value="role"> {{role.text}}
-        </label>
-        <label ng-repeat="r in user.roles">
-            {{r}}
-        </label>
-        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+
+        <script id="searchbox.tpl.html" type="text/ng-template">
+            <input type="text" placeholder="Search">
+        </script>
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+            <ui-gmap-search-box template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
+        </ui-gmap-google-map>
     </div>
     <div class="container">
         <div class="well" ui-view="content">
@@ -84,7 +84,9 @@
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
-
+    <script src="app/forMaps/angular-simple-logger.min.js"></script>
+    <script src="app/forMaps/lodash.min.js"></script>
+    <script src='http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false&language=en&v=3.20'></script>
     <!-- build:js app/app.js  -->
     <!-- inject:js -->
     <script src="app/app.module.js"></script>
@@ -111,6 +113,9 @@
     <script src="app/layouts/error/error.state.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.controller.js"></script>
+    <script src="app/forMaps/lodash.min.js"></script>
+    <script src="app/forMaps/angular-simple-logger.min.js"></script>
+    <script src="app/forMaps/angular-google-maps.min.js"></script>
     <script src="app/entities/restaurant-reservation/restaurant-reservation-dialog.controller.js"></script>
     <script src="app/entities/restaurant-reservation/restaurant-reservation-detail.controller.js"></script>
     <script src="app/entities/restaurant-reservation/restaurant-reservation-delete-dialog.controller.js"></script>
