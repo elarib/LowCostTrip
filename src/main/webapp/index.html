@@ -26,6 +26,15 @@
     <![endif]-->
     <page-ribbon></page-ribbon>
     <div ui-view="navbar" ng-cloak></div>
+    <div ng-controller="checkCtrl">
+        <label ng-repeat="role in roles">
+            <input type="checkbox" checklist-model="user.roles" checklist-value="role"> {{role.text}}
+        </label>
+        <label ng-repeat="r in user.roles">
+            {{r}}
+        </label>
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+    </div>
     <div class="container">
         <div class="well" ui-view="content">
             <!-- Angular views -->
@@ -139,6 +148,7 @@
     <script src="app/components/alert/alert-error.directive.js"></script>
     <script src="app/components/alert/alert.service.js"></script>
     <script src="app/components/alert/alert.directive.js"></script>
+    <script src="app/checklist-model.js"></script>
     <script src="app/blocks/interceptor/notification.interceptor.js"></script>
     <script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
     <script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
