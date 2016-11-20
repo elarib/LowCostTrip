@@ -50,7 +50,7 @@
                     size: new google.maps.Size(71, 71),
                     origin: new google.maps.Point(0, 0),
                     anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25)
+                    scaledSize: new google.maps.Size(17, 17)
                   };
 
                   var marker = new google.maps.Marker({
@@ -64,6 +64,8 @@
 
                   bounds.extend(place.geometry.location);
                 }
+                map.zoom = 17;
+                console.log(map);
 
                 map.fitBounds(bounds);
               });
