@@ -26,15 +26,6 @@
     <![endif]-->
     <page-ribbon></page-ribbon>
     <div ui-view="navbar" ng-cloak></div>
-    <div ng-controller="checkCtrl">
-
-        <script id="searchbox.tpl.html" type="text/ng-template">
-            <input type="text" placeholder="Search">
-        </script>
-        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
-            <ui-gmap-search-box template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
-        </ui-gmap-google-map>
-    </div>
     <div class="container">
         <div class="well" ui-view="content">
             <!-- Angular views -->
