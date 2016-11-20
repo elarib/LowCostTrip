@@ -1,13 +1,21 @@
 <div ng-cloak>
     <div class="row">
-
-       <div ng-controller="checkCtrl">
-	        <script id="searchbox.tpl.html" type="text/ng-template">
-	            <input type="text" placeholder="Search">
-	        </script>
-	        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
-	            <ui-gmap-search-box template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
-	        </ui-gmap-google-map>
-   	 </div>
+        <div id="panel">
+			<input id="target" type="text" placeholder="Search Box">
+			<button id="button">click</button>
+		</div>
+		<div id="map-canvas"></div>
     </div>
 </div>
+
+<style>
+ #map-canvas {
+     height: 400px;
+     width: 500px;
+ }
+
+#target {
+        width: 345px;
+      }
+
+</style>
