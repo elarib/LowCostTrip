@@ -1,13 +1,17 @@
 <div ng-cloak>
     <div class="row">
      	<div class="col-md-6">
-            <div class="col-lg-6 col-sm-6 col-md-6" ng-repeat="a in [1,2,3,4,5]">
+            <div class="col-lg-6 col-sm-6 col-md-6" ng-repeat="h in vm.hotels">
                 <div class="thumbnail">
-                    <img src="https://1.bp.blogspot.com/-aFQ-W_KTFWQ/V6BdtpSUy6I/AAAAAAAAAH4/xD_U-BYItSsNvk1UGfROqLBzzU1h32oXQCLcB/s320/4-diwali-greeting-cards-by-ajay-acharya.jpg" alt="Bootstrap Thumbnail: Beautiful Bootstrap Thumbnail like Material Design Cards">
+                    <img ng-src="{{h.image}}" alt="{{h.name}}">
                     <div class="caption">
-                        <h5>Bootstrap Thumbnail Customization</h5>
-                        <p class="card-description"><strong>Bootstrap Thumbnail</strong>
-                            Customization Example. Here are customized <strong>bootstrap cards</strong></p>
+                        <h4><strong>{{h.name}}</strong></h4>
+                        <p class="card-description">
+                            <span class="glyphicon glyphicon glyphicon-home" aria-hidden="true"></span> {{h.addresss}}</p>
+                        <p>
+                            <span class="glyphicon  glyphicon glyphicon-earphone" aria-hidden="true"></span> {{h.phone}}</p>
+                        <p>
+                            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {{h.website}}</p>
                         <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
                     </div>
                 </div>

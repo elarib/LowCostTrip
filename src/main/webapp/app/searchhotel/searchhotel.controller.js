@@ -5,11 +5,13 @@
         .module('lowCostTripApp')
         .controller('SearchHotelController', SearchHotelController);
 
-    SearchHotelController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    SearchHotelController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state'];
 
-    function SearchHotelController ($scope, Principal, LoginService, $state) {
+    function SearchHotelController ($scope, Principal, LoginService, HotelService, $state) {
         var vm = this;
         initialize();
+
+        vm.hotels=HotelService.getHotelList();
 
           function initialize() {
               var map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -26,7 +28,7 @@
 
               input.onkeyup = function(e) {
                 setTimeout(function() {
-                   var places = document.querySelectorAll('.pac-item');      
+                   var places = document.querySelectorAll('.pac-item');
                    for (var i=0;i<places.length;i++) {
                       var place=places[i];
                       var pac_icon = place.querySelector('.pac-icon').outerHTML
@@ -35,9 +37,9 @@
                    }
                 }, 150);
               }
-              
+
               google.maps.event.addListener(searchBox, 'places_changed', function() {
-               input.value=input.value.split(',')[0]; 
+               input.value=input.value.split(',')[0];
                 var places = searchBox.getPlaces();
                 for (var i = 0, marker; marker = markers[i]; i++) {
                   marker.setMap(null);
@@ -74,17 +76,17 @@
                 var bounds = map.getBounds();
                 searchBox.setBounds(bounds);
               });
-                
-             var button = document.getElementById('button'); 
+
+             var button = document.getElementById('button');
               button.onclick = function() {
                 input.value='test';
-                input.focus(); 
+                input.focus();
               }
             }
 
             google.maps.event.addDomListener(window, 'load', initialize);
 
-    
+
     }
 
 
