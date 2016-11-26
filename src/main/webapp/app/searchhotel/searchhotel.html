@@ -1,0 +1,41 @@
+<div ng-cloak>
+    <div class="row">
+     	<div class="col-md-6">
+            <div class="col-lg-6 col-sm-6 col-md-6" ng-repeat="h in vm.hotels">
+                <div class="thumbnail">
+                    <img ng-src="{{h.image}}" alt="{{h.name}}">
+                    <div class="caption">
+                        <h4><strong>{{h.name}}</strong></h4>
+                        <p class="card-description">
+                            <span class="glyphicon glyphicon glyphicon-home" aria-hidden="true"></span> {{h.addresss}}</p>
+                        <p>
+                            <span class="glyphicon  glyphicon glyphicon-earphone" aria-hidden="true"></span> {{h.phone}}</p>
+                        <p>
+                            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {{h.website}}</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+  		<div class="col-md-6">
+	  		<div id="panel">
+				<input id="target" type="text" placeholder="Search Box">
+				<button id="button">click</button>
+			</div>
+			<div id="map-canvas"></div>
+		</div>
+
+    </div>
+</div>
+
+<style>
+ #map-canvas {
+     height: 400px;
+     width: 500px;
+ }
+
+#target {
+        width: 345px;
+      }
+
+</style>
