@@ -11,14 +11,34 @@
               description-field="email"
               image-field="profilePic"
               input-class="form-control form-control-small"/>
-
+ <div class="row">
+  <div class="col-md-6">
+        <div class="input-group">
+         <input type="text" placeholder="Check In Date" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="checkInDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="input-group">
+        <input type="text" class="form-control"  placeholder="Check out Date" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="checkOutDate" is-open="popup2.opened" datepicker-options="dateOptions2" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+    </div>
+  </div>
+</div>
 
 <div ng-cloak>
 
     <div class="row">
 
      	<div class="col-md-6">
-
+        <div class="panel panel-default" ng-show="errors.length != 0" >
+          Please enter your :
+          <span ng-repeat="error in errors" ng-show="error.state">{{error.name}}</br></span>
+        </div>
 
          <div class="panel panel-default" ng-repeat="h in vm.hotels" >
                 <div class="panel-body">
@@ -77,4 +97,15 @@
         width: 345px;
       }
 
+
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
 </style>
