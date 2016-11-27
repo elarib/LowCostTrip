@@ -1,6 +1,22 @@
+
+
+
+<angucomplete-alt id="members"
+              placeholder="Search City"
+              pause="400"
+              selected-object="chooseCity"
+              remote-url="http://localhost:8080/api/suggest?cityName="
+              remote-url-data-field="results"
+              title-field="cityCountry"
+              description-field="email"
+              image-field="profilePic"
+              input-class="form-control form-control-small"/>
+
+
 <div ng-cloak>
 
     <div class="row">
+
      	<div class="col-md-6">
             <div class="" ng-repeat="h in vm.hotels">
                 <div class="thumbnail">
@@ -20,8 +36,8 @@
         </div>
   		<div class="col-md-6">
 	  		<div id="panel">
-				<input id="target" type="text" placeholder="Search Box">
-				<button id="button">click</button>
+				<input id="target" type="text" placeholder="Search Box" style=" display: none; ">
+				<button id="button" style=" display: none; ">click</button>
 			</div>
 			<div id="map-canvas"></div>
 		</div>
