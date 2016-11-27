@@ -32,7 +32,8 @@
     "arrive": "2.3.0",
     "bootstrap-material-design": "0.5.10",
     "angular-mass-autocomplete": "^0.5.0",
-    "angucomplete-alt": "^2.5.0"
+    "angucomplete-alt": "^2.5.0",
+    "ngmap": "^1.17.8"
   },
   "devDependencies": {
     "angular-mocks": "1.5.8"

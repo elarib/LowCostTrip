@@ -18,7 +18,8 @@
             'uiGmapgoogle-maps',
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar',
-            'angucomplete-alt'
+            'angucomplete-alt',
+            'ngMap'
         ])
         .run(run);
 

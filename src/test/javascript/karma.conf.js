@@ -28,6 +28,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/json3/lib/json3.js',
             'src/main/webapp/bower_components/arrive/src/arrive.js',
             'src/main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
+            'src/main/webapp/bower_components/ngmap/build/scripts/ng-map.js',
             'src/main/webapp/bower_components/angular/angular.js',
             'src/main/webapp/bower_components/angular-aria/angular-aria.js',
             'src/main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',

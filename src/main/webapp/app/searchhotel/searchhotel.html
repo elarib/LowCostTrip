@@ -45,9 +45,11 @@
 
   </form>
 </div>
+<div class="alert alert-success" ng-show="reservedDone">
+  The Hotel <strong>{{hotelName}}</strong> was reserved for you under your name from <strong>{{checkInDate | date :'dd/MMM/yyyy'}}</strong> to <strong>{{checkOutDate | date :'dd/MMM/yyyy'}}</strong>
+</div>
 
 <div ng-cloak>
-
     <div class="row">
      	<div class="col-md-6">
           <div class="loader col-md-2 col-md-offset-5" ng-show="isLoading"></div>

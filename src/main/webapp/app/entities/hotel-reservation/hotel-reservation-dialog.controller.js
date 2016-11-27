@@ -29,6 +29,7 @@
 
             vm.hotelReservation.user = vm.users[vm.users.length - 1];
             vm.isSaving = true;
+            console.log(vm.hotelReservation);
             if (vm.hotelReservation.id !== null) {
                 HotelReservation.update(vm.hotelReservation, onSaveSuccess, onSaveError);
             } else {

@@ -11,9 +11,9 @@
 
        
 
-    SearchHotelController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http'];
+    SearchHotelController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http', 'HotelReservation', 'User'];
 
-    function SearchHotelController ($scope, Principal, LoginService, HotelService, $state,$http) {
+    function SearchHotelController ($scope, Principal, LoginService, HotelService, $state,$http,  HotelReservation, User) {
         var vm = this;
         initialize();
 
@@ -24,7 +24,8 @@
         $scope.choosenCity=null;
         $scope.isLoading = false;
         $scope.isLoaded = false;
-      //searchHotel(800029889);
+        $scope.reservedDone = false;
+        searchHotel(800029889);
 
         $scope.chooseCity = function (selected) {
            
@@ -118,6 +119,21 @@
               });
         }
 
+        function searchHotel(id){
+           $scope.isLoading = true;
+            $http({
+              method: 'GET',
+              url: "http://localhost:8080/api/searchHotel?cityID="+id
+            }).then(function successCallback(response) {
+               console.log(response);
+               $scope.isLoading = false;
+               vm.hotels=response.data;
+              $scope.getWeather();
+              }, function errorCallback(response) {
+               console.log(response);
+              });
+        }
+
 
 
         $scope.getWeather = function()
@@ -135,12 +151,32 @@
               });
         }
 
+        vm.users = User.query();
 
         $scope.reserver = function(hotel){
 
 
-          console.log(hotel);
+          var hotelReserv = {
+            'checkIn' : $scope.checkInDate ,
+            'checkOut' : $scope.checkOutDate,
+            'id' : null,
+            'idHotel': hotel.id,
+            'pricePerNight' : hotel.price,
+            'user' : vm.users[vm.users.length - 1]
+          }
+          console.log(hotelReserv);
+
+          HotelReservation.save(hotelReserv,function(result){
+            console.log(result);
+            $scope.hotelName = hotel.name;
+            $scope.reservedDone = true;
+
+          }, function(result){
+            console.log(result);
+          })
         }
+
+            
 
         function updateMap($coord){
            var map = new google.maps.Map(document.getElementById('map-canvas'), {
