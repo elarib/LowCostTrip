@@ -34,7 +34,7 @@ public class SearchHotelResource {
 	public static String OLD_PREFIX_IMG= "square150";
 	
 	@RequestMapping("/searchHotel")
-	public String test(HttpServletRequest req) throws Exception {
+	public String searchHotel(HttpServletRequest req) throws Exception {
 		
 //		String response = new RestTemplate().getForObject("http://secure.rezserver.com/hotels/results/list?refid=7723&varid=1a2b3a4b73b74a75b&city_id=800029889&type=city&rooms=1&adults=1&children=0&check_in=12%2F13%2F2016&check_out=12%2F16%2F2016&date_search=1&currency=EUR&radius=0&distance_unit=mile&search_type=city",
 //				String.class);

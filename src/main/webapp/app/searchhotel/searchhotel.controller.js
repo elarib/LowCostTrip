@@ -22,6 +22,7 @@
         $scope.checkInDate=null;
         $scope.checkInDate=null;
         $scope.choosenCity=null;
+        $scope.isLoading = false;
       //searchHotel(800029889);
 
         $scope.chooseCity = function (selected) {
@@ -33,7 +34,7 @@
 
                 updateVars();
                 console.log($scope.errors);
-                searchHotel(selected.originalObject.id);
+                //searchHotel(selected.originalObject.id);
 
 
                }
@@ -101,13 +102,14 @@
           };
 
 
-        function searchHotel(cityId){
-          $scope.errorDisplay = false;
+        $scope.searchHotel = function(){
+           $scope.isLoading = true;
             $http({
               method: 'GET',
-              url: "http://localhost:8080/api/searchHotel?cityID="+cityId
+              url: "http://localhost:8080/api/searchHotel?cityID="+$scope.choosenCity.id
             }).then(function successCallback(response) {
                console.log(response);
+               $scope.isLoading = false;
                vm.hotels=response.data;
               }, function errorCallback(response) {
                console.log(response);
