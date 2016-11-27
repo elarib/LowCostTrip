@@ -65,7 +65,7 @@
                             <p style="font-size: 12px;"> 
                                <span class="glyphicon glyphicon glyphicon-home"></span> {{h.address}}</br>    
                             </p>
-                            <button class="btn btn-primary btn-xs">
+                            <button class="btn btn-primary btn-xs" ng-click="reserver(h)">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                 Reserve</button>
                         </div>
@@ -87,12 +87,13 @@
               </div>
           </div> -->
         </div>
-  		<div class="col-md-6">
+  	<div class="col-md-6">
 	  		<div id="panel">
-				<input id="target" type="text" placeholder="Search Box" style=" display: none; ">
-				<button id="button" style=" display: none; ">click</button>
-			</div>
-			<div id="map-canvas"></div>
+    				<input id="target" type="text" placeholder="Search Box" style=" display: none; ">
+    				<button id="button" style=" display: none; ">click</button>
+			  </div>
+			 <div id="map-canvas"></div>
+       <div  ng-include="'app/searchhotel/weather.html'" ng-show="isLoaded"></div>
 		</div>
 
     </div>

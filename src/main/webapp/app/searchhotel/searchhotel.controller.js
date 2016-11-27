@@ -23,6 +23,7 @@
         $scope.checkInDate=null;
         $scope.choosenCity=null;
         $scope.isLoading = false;
+        $scope.isLoaded = false;
       //searchHotel(800029889);
 
         $scope.chooseCity = function (selected) {
@@ -111,9 +112,34 @@
                console.log(response);
                $scope.isLoading = false;
                vm.hotels=response.data;
+              $scope.getWeather();
               }, function errorCallback(response) {
                console.log(response);
               });
+        }
+
+
+
+        $scope.getWeather = function()
+        {
+          $http({
+              method: 'GET',
+              //url: "http://localhost:8080/api/getWeather?coord=43.2983,5.3780"
+              url: "http://localhost:8080/api/getWeather?coord="+$scope.choosenCity.coord
+            }).then(function successCallback(response) {
+               console.log(response);
+               $scope.isLoaded = true;
+               $scope.weather=response.data;
+              }, function errorCallback(response) {
+               console.log(response);
+              });
+        }
+
+
+        $scope.reserver = function(hotel){
+
+
+          console.log(hotel);
         }
 
         function updateMap($coord){
