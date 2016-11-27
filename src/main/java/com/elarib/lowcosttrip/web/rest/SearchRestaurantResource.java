@@ -29,6 +29,8 @@ public class SearchRestaurantResource {
 	public static String GOOGLE_MAPS_API_KEY = "AIzaSyAVyvH42WZzRKQK1Jr7Am_9S5vHyF42OaQ";
 	
 	public static String SEARCH_RESTO_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=[COORD]&radius=500&type=restaurant&key="+GOOGLE_MAPS_API_KEY;
+	public static String PHOTO_URL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=[PHOTOREFERENCE]&key="+GOOGLE_MAPS_API_KEY;
+	
 	
 	@RequestMapping("searchResto")
 	public String searchHotel(HttpServletRequest req) throws JsonProcessingException, IOException{
@@ -49,8 +51,22 @@ public class SearchRestaurantResource {
 		
 		object.put("results", list);
 		
+		int i =0;
 		while(listRestoIterator.hasNext()){
 			JsonNode ele = listRestoIterator.next();
+			
+			if(i==0)
+			System.out.println();
+			
+			i++;
+			String photoReference = "";
+			try{
+				photoReference= ele.get("photos").get(0).get("photo_reference").asText();
+			}catch(Exception e){
+				System.out.println("Error : "+ele.get("place_id").asText());
+			}
+			
+			
 			
 			
 			
@@ -59,7 +75,8 @@ public class SearchRestaurantResource {
 					ele.get("name").asText(),
 					ele.get("vicinity").asText(),
 					ele.get("geometry").get("location").get("lat").asText(),
-					ele.get("geometry").get("location").get("lng").asText()
+					ele.get("geometry").get("location").get("lng").asText(),
+					photoReference
 					)));
 		}
 

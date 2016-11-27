@@ -7,14 +7,8 @@ public class RestaurantPlaces {
 	private String vicinity;
 	private String lat;
 	private String log;
-	public RestaurantPlaces(String placeId, String name, String vicinity, String lat, String log) {
-		super();
-		this.placeId = placeId;
-		this.name = name;
-		this.vicinity = vicinity;
-		this.lat = lat;
-		this.log = log;
-	}
+	private String imgUrl;
+	
 	public String getPlaceId() {
 		return placeId;
 	}
@@ -45,11 +39,27 @@ public class RestaurantPlaces {
 	public void setLog(String log) {
 		this.log = log;
 	}
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 	@Override
 	public String toString() {
 		return "RestaurantPlaces [placeId=" + placeId + ", name=" + name + ", vicinity=" + vicinity + ", lat=" + lat
-				+ ", log=" + log + "]";
+				+ ", log=" + log + ", imgUrl=" + imgUrl + "]";
 	}
+	public RestaurantPlaces(String placeId, String name, String vicinity, String lat, String log, String imgUrl) {
+		super();
+		this.placeId = placeId;
+		this.name = name;
+		this.vicinity = vicinity;
+		this.lat = lat;
+		this.log = log;
+		this.imgUrl = imgUrl;
+	}
+	
 	
 	
 	
