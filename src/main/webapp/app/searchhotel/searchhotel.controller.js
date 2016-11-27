@@ -11,26 +11,43 @@
 
        
 
-    SearchHotelController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state'];
+    SearchHotelController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http'];
 
-    function SearchHotelController ($scope, Principal, LoginService, HotelService, $state) {
+    function SearchHotelController ($scope, Principal, LoginService, HotelService, $state,$http) {
         var vm = this;
         initialize();
 
 
-        vm.hotels=HotelService.getHotelList();
-
+        
+      searchHotel(800029889);
 
         $scope.chooseCity = function (selected) {
            
             if(typeof selected !== "undefined"){
                console.log(selected); 
                updateMap(selected.originalObject.coord.split(","))
-            }
+
+
+                searchHotel(selected.originalObject.id);
+
+
+               }
             
 
 
         };
+
+        function searchHotel(cityId){
+            $http({
+              method: 'GET',
+              url: "http://localhost:8080/api/searchHotel?cityID="+cityId
+            }).then(function successCallback(response) {
+               console.log(response);
+               vm.hotels=response.data;
+              }, function errorCallback(response) {
+               console.log(response);
+              });
+        }
 
         function updateMap($coord){
            var map = new google.maps.Map(document.getElementById('map-canvas'), {
