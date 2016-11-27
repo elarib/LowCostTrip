@@ -1,0 +1,26 @@
+{
+    "lowCostTripApp": {
+        "hotelReservation" : {
+            "home": {
+                "title": "HotelReservations",
+                "createLabel": "Créer un nouveau Hotel Reservation",
+                "createOrEditLabel": "Créer ou éditer un Hotel Reservation",
+                "search": "Recherche pour Hotel Reservation"
+            },
+            "created": "Un nouveau Hotel Reservation a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Hotel Reservation avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Hotel Reservation avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Hotel Reservation {{ id }} ?"
+            },
+            "detail": {
+                "title": "Hotel Reservation"
+            },
+            "idHotel": "Id Hotel",
+            "checkIn": "Check In",
+            "checkOut": "Check Out",
+            "pricePerNight": "Price Per Night",
+            "user": "User"
+        }
+    }
+}

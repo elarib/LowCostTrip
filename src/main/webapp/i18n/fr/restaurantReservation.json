@@ -1,0 +1,24 @@
+{
+    "lowCostTripApp": {
+        "restaurantReservation" : {
+            "home": {
+                "title": "RestaurantReservations",
+                "createLabel": "Créer un nouveau Restaurant Reservation",
+                "createOrEditLabel": "Créer ou éditer un Restaurant Reservation",
+                "search": "Recherche pour Restaurant Reservation"
+            },
+            "created": "Un nouveau Restaurant Reservation a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Restaurant Reservation avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Restaurant Reservation avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Restaurant Reservation {{ id }} ?"
+            },
+            "detail": {
+                "title": "Restaurant Reservation"
+            },
+            "idResto": "Id Resto",
+            "date": "Date",
+            "user": "User"
+        }
+    }
+}

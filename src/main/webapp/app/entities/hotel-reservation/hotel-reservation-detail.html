@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="lowCostTripApp.hotelReservation.detail.title">Hotel Reservation</span> {{vm.hotelReservation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="lowCostTripApp.hotelReservation.idHotel">Id Hotel</span></dt>
+        <dd>
+            <span>{{vm.hotelReservation.idHotel}}</span>
+        </dd>
+        <dt><span data-translate="lowCostTripApp.hotelReservation.checkIn">Check In</span></dt>
+        <dd>
+            <span>{{vm.hotelReservation.checkIn | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="lowCostTripApp.hotelReservation.checkOut">Check Out</span></dt>
+        <dd>
+            <span>{{vm.hotelReservation.checkOut | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="lowCostTripApp.hotelReservation.pricePerNight">Price Per Night</span></dt>
+        <dd>
+            <span>{{vm.hotelReservation.pricePerNight}}</span>
+        </dd>
+        <dt><span data-translate="lowCostTripApp.hotelReservation.user">User</span></dt>
+        <dd>
+            {{vm.hotelReservation.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="hotel-reservation-detail.edit({id:vm.hotelReservation.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

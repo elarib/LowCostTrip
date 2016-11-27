@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="lowCostTripApp.restaurantReservation.detail.title">Restaurant Reservation</span> {{vm.restaurantReservation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="lowCostTripApp.restaurantReservation.idResto">Id Resto</span></dt>
+        <dd>
+            <span>{{vm.restaurantReservation.idResto}}</span>
+        </dd>
+        <dt><span data-translate="lowCostTripApp.restaurantReservation.date">Date</span></dt>
+        <dd>
+            <span>{{vm.restaurantReservation.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="lowCostTripApp.restaurantReservation.user">User</span></dt>
+        <dd>
+            {{vm.restaurantReservation.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="restaurant-reservation-detail.edit({id:vm.restaurantReservation.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
