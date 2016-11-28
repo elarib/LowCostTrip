@@ -28,6 +28,7 @@
         function save () {
             vm.isSaving = true;
             vm.hotelReservation.user = vm.users[vm.users.length - 1];
+            console.log(vm.restaurantReservation);
             if (vm.restaurantReservation.id !== null) {
                 RestaurantReservation.update(vm.restaurantReservation, onSaveSuccess, onSaveError);
             } else {

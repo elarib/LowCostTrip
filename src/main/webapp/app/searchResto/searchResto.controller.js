@@ -79,6 +79,27 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
   }
 
 
+      $scope.checkInDate = null;
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(2000, 5, 22),
+            startingDay: 1
+          };
+
+
+
+          $scope.altInputFormats = ['M!/d!/yyyy'];
+
+         $scope.open1 = function() {
+          $scope.popup1.opened = true;
+        };
+
+         $scope.popup1 = {
+            opened: false
+          };
+
+
 
 
 }]). 
@@ -92,9 +113,9 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
 
 
 
-    SearchRestoController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http', 'HotelReservation', 'User','$stateParams', '$uibModal', '$rootScope'];
+    SearchRestoController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http', 'RestaurantReservation', 'User','$stateParams', '$uibModal', '$rootScope'];
 
-    function SearchRestoController ($scope, Principal, LoginService, HotelService, $state,$http,  HotelReservation, User, $stateParams, $uibModal,  $rootScope) {
+    function SearchRestoController ($scope, Principal, LoginService, HotelService, $state,$http,  RestaurantReservation, User, $stateParams, $uibModal,  $rootScope) {
         var vm = this;
         initialize();
         
@@ -113,42 +134,7 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
               mapTypeId: google.maps.MapTypeId.ROADMAP
       });
 
-        $scope.checkInDate = null;
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
-            startingDay: 1
-          };
-
-          $scope.$watch("checkInDate", function(v){
-            $scope.dateOptions2.minDate = new Date($scope.checkInDate);
-          });
-
-
-          $scope.dateOptions2 = {
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date($scope.checkInDate),
-            startingDay: 1
-          };
-
-          $scope.altInputFormats = ['M!/d!/yyyy'];
-
-         $scope.open1 = function() {
-          $scope.popup1.opened = true;
-        };
-         $scope.open2 = function() {
-          $scope.popup2.opened = true;
-        };
-
-         $scope.popup1 = {
-            opened: false
-          };
-
-          $scope.popup2 = {
-            opened: false
-          };
+       
 
      
         $scope.SearchResto = function(){
@@ -193,23 +179,19 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
 
         vm.users = User.query();
 
-        $scope.reserver = function(hotel){
+        $scope.reserver = function(r,checkInDate){
+          console.log(r);
 
-
-          var hotelReserv = {
-            'checkIn' : $scope.checkInDate ,
-            'checkOut' : $scope.checkOutDate,
+          var restoReserv = {
             'id' : null,
-            'idHotel': hotel.id,
-            'pricePerNight' : hotel.price,
+            'idResto': r.placeId,
+            'date': checkInDate,
             'user' : vm.users[vm.users.length - 1]
           }
-          console.log(hotelReserv);
+          console.log(restoReserv);
 
-          HotelReservation.save(hotelReserv,function(result){
+          RestaurantReservation.save(restoReserv,function(result){
             console.log(result);
-            $scope.hotelName = hotel.name;
-            $scope.reservedDone = true;
 
           }, function(result){
             console.log(result);
@@ -218,9 +200,6 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
 
 
 
-        $scope.modalController =function(){
-          console.log("Cons");
-        }
 
         $scope.checkIterinaire = function(r){
           console.log(r);
@@ -234,7 +213,9 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
                   controllerAs: 'vm',
                   size: 'lg'
               })
-              .result.then(function() {
+              .result.then(function(checkInDate) {
+                console.log(checkInDate);
+                $scope.reserver(r,checkInDate);
 
               }, function() {
               });

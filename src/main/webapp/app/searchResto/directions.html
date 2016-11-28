@@ -23,8 +23,15 @@
       <ui-gmap-google-map center="map.center" zoom="map.zoom" events="map.events" options="map.options" bounds="map.bounds" control="map.control">
       </ui-gmap-google-map>
     </div>
+    <div >
+            <div class="input-group">
+               <input type="text" placeholder="Check In Date" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="checkInDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+          </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
-    <button type="button" class="btn btn-primary" ng-click="$close()">Reserve</button>
+    <button type="button" class="btn btn-primary" ng-click="$close(checkInDate)">Reserve</button>
 </div>
