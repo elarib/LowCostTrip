@@ -26,7 +26,7 @@ import com.google.maps.model.PriceLevel;
 @RequestMapping("/api")
 public class SearchRestaurantResource {
 	
-	public static String GOOGLE_MAPS_API_KEY = "AIzaSyAVyvH42WZzRKQK1Jr7Am_9S5vHyF42OaQ";
+	public static String GOOGLE_MAPS_API_KEY = "AIzaSyATB7ZMCBSPtpaJH_s6dQDHRVKlPfDqx8U";
 	
 	public static String SEARCH_RESTO_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=[COORD]&radius=500&type=restaurant&key="+GOOGLE_MAPS_API_KEY;
 	public static String PHOTO_URL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=[PHOTOREFERENCE]&key="+GOOGLE_MAPS_API_KEY;
@@ -62,7 +62,7 @@ public class SearchRestaurantResource {
 			String photoReference = "";
 			try{
 				photoReference= PHOTO_URL.replace("[PHOTOREFERENCE]", ele.get("photos").get(0).get("photo_reference").asText());
-
+						
 			}catch(Exception e){
 				System.out.println("Error : "+ele.get("place_id").asText());
 			}

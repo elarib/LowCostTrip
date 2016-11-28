@@ -10,7 +10,7 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('search-resto', {
             parent: 'app',
-            url: '/search-resto',
+            url: '/search-resto/{coord}',
             data: {
                 authorities: []
             },

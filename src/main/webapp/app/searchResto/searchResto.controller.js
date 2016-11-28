@@ -11,18 +11,17 @@
 
        
 
-    SearchRestoController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http', 'HotelReservation', 'User'];
+    SearchRestoController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http', 'HotelReservation', 'User','$stateParams'];
 
-    function SearchRestoController ($scope, Principal, LoginService, HotelService, $state,$http,  HotelReservation, User) {
+    function SearchRestoController ($scope, Principal, LoginService, HotelService, $state,$http,  HotelReservation, User, $stateParams) {
         var vm = this;
         initialize();
-
         
       $scope.reservedDone = false;
       $scope.isLoading = true;
 
-     
-      $scope.coord = "43.2983,5.3780";
+
+      $scope.coord = $stateParams.coord;
       $scope.coords = $scope.coord.split(",");
 
        $scope.map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -90,7 +89,7 @@
                console.log(response);
               });
         }
-         $scope.SearchResto();
+        $scope.SearchResto();
 
         function SearchResto(id){
            $scope.isLoading = true;
