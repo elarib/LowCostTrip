@@ -10,10 +10,21 @@
 
 
        
+angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootScope', 'NgMap', function($scope, $rootScope, NgMap) {
+    
 
-    SearchRestoController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http', 'HotelReservation', 'User','$stateParams'];
+        $scope.logLatLng = function(e) {
+          console.log('loc', e.latLng);
+        }
+        $scope.wayPoints = [
+          {location: {lat:44.32384807250689, lng: -78.079833984375}, stopover: true},
+          {location: {lat:44.55916341529184, lng: -76.17919921875}, stopover: true},
+        ];
+}]);
 
-    function SearchRestoController ($scope, Principal, LoginService, HotelService, $state,$http,  HotelReservation, User, $stateParams) {
+    SearchRestoController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http', 'HotelReservation', 'User','$stateParams', '$uibModal','NgMap', '$rootScope','google-maps'];
+
+    function SearchRestoController ($scope, Principal, LoginService, HotelService, $state,$http,  HotelReservation, User, $stateParams, $uibModal, NgMap, $rootScope, goo) {
         var vm = this;
         initialize();
         
@@ -22,7 +33,9 @@
 
 
       $scope.coord = $stateParams.coord;
+      $rootScope.coord = $scope.coord;
       $scope.coords = $scope.coord.split(",");
+
 
        $scope.map = new google.maps.Map(document.getElementById('map-canvas'), {
               zoom: 14,
@@ -133,7 +146,27 @@
           })
         }
 
-            
+
+
+        $scope.modalController =function(){
+          console.log("Cons");
+        }
+
+        $scope.checkIterinaire = function(hotel){
+          console.log("kjkjk");
+          $uibModal.open({
+                  templateUrl: 'app/searchResto/directions.html',
+                  controller: 'modalController',
+                  controllerAs: 'vm',
+                  size: 'lg'
+              })
+              .result.then(function() {
+                  alert('closed');
+              }, function() {
+                  alert('canceled');
+              });
+        }
+
 
      
         // Adds a marker to the map.
