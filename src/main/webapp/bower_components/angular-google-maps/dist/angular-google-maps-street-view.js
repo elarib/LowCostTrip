@@ -1,9 +1,9 @@
-/*! angular-google-maps 2.4.0 2016-09-19
+/*! angular-google-maps 2.3.2 2016-02-11
  *  AngularJS directives for Google Maps
  *  git: https://github.com/angular-ui/angular-google-maps.git
  */
 ;
-(function( window, angular, _, undefined ){
+(function( window, angular, undefined ){
   'use strict';
 /*
 !
@@ -109,7 +109,7 @@ return UUID;
         script.id = scriptId = "ui_gmap_map_load_" + (uuid.generate());
         script.type = 'text/javascript';
         script.src = getScriptUrl(options) + query;
-        return document.head.appendChild(script);
+        return document.body.appendChild(script);
       };
       isGoogleMapsLoaded = function() {
         return angular.isDefined(window.google) && angular.isDefined(window.google.maps);
@@ -228,9 +228,7 @@ return UUID;
         if (!value) {
           return;
         }
-        if (value instanceof google.maps.LatLng) {
-          return value;
-        } else if (Array.isArray(value) && value.length === 2) {
+        if (Array.isArray(value) && value.length === 2) {
           return new google.maps.LatLng(value[1], value[0]);
         } else if (angular.isDefined(value.type) && value.type === 'Point') {
           return new google.maps.LatLng(value.coordinates[1], value.coordinates[0]);
@@ -674,4 +672,4 @@ StreetViewPanorama Directive to care of basic initialization of StreetViewPanora
   ]);
 
 }).call(this);
-}( window, angular, _));
+}( window,angular));

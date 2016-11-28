@@ -10,21 +10,91 @@
 
 
        
-angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootScope', 'NgMap', function($scope, $rootScope, NgMap) {
+angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootScope', 'uiGmapGoogleMapApi', '$document' ,'uiGmapIsReady', '$timeout', function($scope, $rootScope,uiGmapGoogleMapApi,$document, uiGmapIsReady, $timeout) {
     
+  console.log(uiGmapGoogleMapApi);
+  var self = this;
 
-        $scope.logLatLng = function(e) {
-          console.log('loc', e.latLng);
-        }
-        $scope.wayPoints = [
-          {location: {lat:44.32384807250689, lng: -78.079833984375}, stopover: true},
-          {location: {lat:44.55916341529184, lng: -76.17919921875}, stopover: true},
-        ];
-}]);
+   $scope.map = { 
+    control: {},
+    center: {
+      latitude: $rootScope.coords[0],
+      longitude: $rootScope.coords[1]
+    },
+    zoom: 9,
+    options: {
+      scrollwheel: false,
+      panControl: false,
+      scaleControl: false,
+      draggable: true,
+      maxZoom: 22,
+      minZoom: 0
+    },
+    clusterOptions: {},
+    clusterEvents: {},
+    refresh : false,
+    bounds: {},
+    events: { 
+      idle: function() {
+        console.log('idle');
+      }
+    },
+  };
 
-    SearchRestoController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http', 'HotelReservation', 'User','$stateParams', '$uibModal','NgMap', '$rootScope','google-maps'];
+  uiGmapGoogleMapApi.then(function(maps) {
+    console.log('start');
+    $scope.directionsDisplay = new maps.DirectionsRenderer();
 
-    function SearchRestoController ($scope, Principal, LoginService, HotelService, $state,$http,  HotelReservation, User, $stateParams, $uibModal, NgMap, $rootScope, goo) {
+      uiGmapIsReady.promise(1).then(function(instances) {
+      directions(maps, $rootScope.coords[0], $rootScope.coords[1]);
+        $timeout(function() {
+          directions(maps, $rootScope.restoCoord[0], $rootScope.restoCoord[1]);
+        }, 1000)
+      });
+  }); 
+
+  function directions(maps, newLat, newLong) {
+      console.log('getting directions');
+      var directionsService = new maps.DirectionsService();
+      $scope.directionsDisplay.setMap($scope.map.control.getGMap());
+
+      var origin = $scope.map.center.latitude + ", " + $scope.map.center.longitude;
+
+      var request = {
+          origin: origin,
+          destination: newLat + ", " + newLong,
+          travelMode: maps.TravelMode['DRIVING'],
+          optimizeWaypoints: true
+      };
+
+      directionsService.route(request, function (response, status) {
+          console.log('directions found');
+          if (status === google.maps.DirectionsStatus.OK) {
+              $scope.directionsDisplay.setDirections(response);
+          } else {
+              console.log('Directions request failed due to ' + status);
+          }
+      });
+
+  }
+
+
+
+
+}]). 
+  config(['uiGmapGoogleMapApiProvider', function (GoogleMapApiProvider) {
+    GoogleMapApiProvider.configure({
+          key: 'AIzaSyATB7ZMCBSPtpaJH_s6dQDHRVKlPfDqx8U',
+          v: '3.17',
+          libraries: 'weather,geometry,visualization,places'
+      });
+  }]);;
+
+
+
+    SearchRestoController.$inject = ['$scope', 'Principal', 'LoginService','HotelService', '$state','$http', 'HotelReservation', 'User','$stateParams', '$uibModal', '$rootScope'];
+
+    function SearchRestoController ($scope, Principal, LoginService, HotelService, $state,$http,  HotelReservation, User, $stateParams, $uibModal,  $rootScope) {
         var vm = this;
         initialize();
         
@@ -33,8 +103,8 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
 
 
       $scope.coord = $stateParams.coord;
-      $rootScope.coord = $scope.coord;
-      $scope.coords = $scope.coord.split(",");
+      $scope.coord = $scope.coord;
+      $rootScope.coords = $scope.coord.split(",");
 
 
        $scope.map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -152,8 +222,12 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
           console.log("Cons");
         }
 
-        $scope.checkIterinaire = function(hotel){
-          console.log("kjkjk");
+        $scope.checkIterinaire = function(r){
+          console.log(r);
+          $rootScope.restoCoord=[
+            parseFloat(r.lat),
+            parseFloat(r.lng)
+          ]
           $uibModal.open({
                   templateUrl: 'app/searchResto/directions.html',
                   controller: 'modalController',
@@ -161,9 +235,8 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
                   size: 'lg'
               })
               .result.then(function() {
-                  alert('closed');
+
               }, function() {
-                  alert('canceled');
               });
         }
 
