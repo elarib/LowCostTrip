@@ -33,7 +33,7 @@ public class SearchRestaurantResource {
 	
 	
 	@RequestMapping("searchResto")
-	public String searchHotel(HttpServletRequest req) throws JsonProcessingException, IOException{
+	public String searchResto(HttpServletRequest req) throws JsonProcessingException, IOException{
 		
 		String response = new RestTemplate().getForObject(SEARCH_RESTO_URL.replace("[COORD]", req.getParameter("coord")),
 				String.class);
@@ -61,7 +61,8 @@ public class SearchRestaurantResource {
 			i++;
 			String photoReference = "";
 			try{
-				photoReference= ele.get("photos").get(0).get("photo_reference").asText();
+				photoReference= PHOTO_URL.replace("[PHOTOREFERENCE]", ele.get("photos").get(0).get("photo_reference").asText());
+
 			}catch(Exception e){
 				System.out.println("Error : "+ele.get("place_id").asText());
 			}
@@ -83,6 +84,17 @@ public class SearchRestaurantResource {
 		return object.toString();
 		
 	
+		
+	}
+	
+	@RequestMapping("getImg")
+	public String getImg(HttpServletRequest req) {
+		
+		String response = new RestTemplate().getForObject(PHOTO_URL.replace("[PHOTOREFERENCE]", req.getParameter("ref")),
+				String.class);
+		
+		
+		return response;
 		
 	}
 	

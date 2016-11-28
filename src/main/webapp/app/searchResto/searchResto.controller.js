@@ -21,6 +21,7 @@
       $scope.reservedDone = false;
       $scope.isLoading = true;
 
+     
       $scope.coord = "43.2983,5.3780";
       $scope.coords = $scope.coord.split(",");
 
