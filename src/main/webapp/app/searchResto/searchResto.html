@@ -1,0 +1,89 @@
+<div class="alert alert-success" ng-show="reservedDone">
+  The Hotel <strong>{{hotelName}}</strong> was reserved for you under your name from <strong>{{checkInDate | date :'dd/MMM/yyyy'}}</strong> to <strong>{{checkOutDate | date :'dd/MMM/yyyy'}}</strong>
+</div>
+
+<div ng-cloak>
+    <div class="row">
+     	<div class="col-md-6">
+          <div class="loader col-md-2 col-md-offset-5" ng-show="isLoading"></div>
+         <div class="panel panel-default" ng-repeat="(k,r) in vm.restos" >
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img ng-src="{{r.image}}" alt="{{r.name}}" class="img-responsive">
+                        </div>
+                        <div class="col-md-8">
+                            <h6>{{k}} - {{r.name}} </h6>
+                            <p style="font-size: 12px;"> 
+                               <span class="glyphicon glyphicon glyphicon-home"></span> {{r.vicinity}}</br>    
+                            </p>
+                            <button class="btn btn-primary btn-xs" ng-click="reserver(r)">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                Reserve</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+   <!--      <div class="col-lg-6 col-sm-6 col-md-6" ng-repeat="h in vm.hotels" style=" min-height: 350px; ">
+              <div class="thumbnail" style=" min-height: 350px; ">
+                  <img ng-src="{{h.image}}" alt="{{h.name}}">
+                  <div class="caption">
+                      <strong>{{h.name}}  </strong> <span ng-show="h.starRating != 0">{{h.starRating}}<span class="glyphicon glyphicon-star"></span></span></br>
+                      <span class="glyphicon  glyphicon glyphicon-earphone" aria-hidden="true"></span> {{h.price}} <span class="glyphicon glyphicon-euro"></span></br>
+                      <span class="glyphicon glyphicon glyphicon-home"></span> {{h.address}}</br>          
+                      
+                      <a href="#" class="btn btn-primary" role="button">Button</a>
+                  </div>
+              </div>
+          </div> -->
+        </div>
+  	<div class="col-md-6">
+	  		<div id="panel">
+    				<input id="target" type="text" placeholder="Search Box" style=" display: none; ">
+    				<button id="button" style=" display: none; ">click</button>
+			  </div>
+			 <div id="map-canvas"></div>
+    
+		</div>
+
+    </div>
+</div>
+
+<style>
+ #map-canvas {
+     height: 400px;
+     width: 500px;
+ }
+
+#target {
+        width: 345px;
+      }
+
+
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+
+  .loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
