@@ -67,7 +67,7 @@ class HotelReservationGatlingTest extends Simulation {
             .exec(http("Create new hotelReservation")
             .post("/api/hotel-reservations")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "idHotel":"SAMPLE_TEXT", "checkIn":"2020-01-01T00:00:00.000Z", "checkOut":"2020-01-01T00:00:00.000Z", "pricePerNight":null}""")).asJSON
+            .body(StringBody("""{"id":null, "idHotel":"SAMPLE_TEXT", "checkIn":"2020-01-01T00:00:00.000Z", "checkOut":"2020-01-01T00:00:00.000Z", "pricePerNight":null, "coord":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_hotelReservation_url"))).exitHereIfFailed
             .pause(10)

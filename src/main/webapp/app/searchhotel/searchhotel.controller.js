@@ -155,13 +155,13 @@
 
         $scope.reserver = function(hotel){
 
-
           var hotelReserv = {
             'checkIn' : $scope.checkInDate ,
             'checkOut' : $scope.checkOutDate,
             'id' : null,
             'idHotel': hotel.id,
             'pricePerNight' : hotel.price,
+            'coord' : hotel.longtitue+","+hotel.latitude,
             'user' : vm.users[vm.users.length - 1]
           }
           console.log(hotelReserv);

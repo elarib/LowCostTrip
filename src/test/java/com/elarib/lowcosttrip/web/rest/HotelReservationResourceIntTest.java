@@ -53,6 +53,9 @@ public class HotelReservationResourceIntTest {
     private static final Long DEFAULT_PRICE_PER_NIGHT = 1L;
     private static final Long UPDATED_PRICE_PER_NIGHT = 2L;
 
+    private static final String DEFAULT_COORD = "AAAAA";
+    private static final String UPDATED_COORD = "BBBBB";
+
     @Inject
     private HotelReservationRepository hotelReservationRepository;
 
@@ -90,7 +93,8 @@ public class HotelReservationResourceIntTest {
                 .idHotel(DEFAULT_ID_HOTEL)
                 .checkIn(DEFAULT_CHECK_IN)
                 .checkOut(DEFAULT_CHECK_OUT)
-                .pricePerNight(DEFAULT_PRICE_PER_NIGHT);
+                .pricePerNight(DEFAULT_PRICE_PER_NIGHT)
+                .coord(DEFAULT_COORD);
         // Add required entity
         User user = UserResourceIntTest.createEntity(em);
         em.persist(user);
@@ -124,6 +128,7 @@ public class HotelReservationResourceIntTest {
         assertThat(testHotelReservation.getCheckIn()).isEqualTo(DEFAULT_CHECK_IN);
         assertThat(testHotelReservation.getCheckOut()).isEqualTo(DEFAULT_CHECK_OUT);
         assertThat(testHotelReservation.getPricePerNight()).isEqualTo(DEFAULT_PRICE_PER_NIGHT);
+        assertThat(testHotelReservation.getCoord()).isEqualTo(DEFAULT_COORD);
     }
 
     @Test
@@ -200,6 +205,24 @@ public class HotelReservationResourceIntTest {
 
     @Test
     @Transactional
+    public void checkCoordIsRequired() throws Exception {
+        int databaseSizeBeforeTest = hotelReservationRepository.findAll().size();
+        // set the field null
+        hotelReservation.setCoord(null);
+
+        // Create the HotelReservation, which fails.
+
+        restHotelReservationMockMvc.perform(post("/api/hotel-reservations")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(hotelReservation)))
+                .andExpect(status().isBadRequest());
+
+        List<HotelReservation> hotelReservations = hotelReservationRepository.findAll();
+        assertThat(hotelReservations).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllHotelReservations() throws Exception {
         // Initialize the database
         hotelReservationRepository.saveAndFlush(hotelReservation);
@@ -212,7 +235,8 @@ public class HotelReservationResourceIntTest {
                 .andExpect(jsonPath("$.[*].idHotel").value(hasItem(DEFAULT_ID_HOTEL.toString())))
                 .andExpect(jsonPath("$.[*].checkIn").value(hasItem(DEFAULT_CHECK_IN.toString())))
                 .andExpect(jsonPath("$.[*].checkOut").value(hasItem(DEFAULT_CHECK_OUT.toString())))
-                .andExpect(jsonPath("$.[*].pricePerNight").value(hasItem(DEFAULT_PRICE_PER_NIGHT.intValue())));
+                .andExpect(jsonPath("$.[*].pricePerNight").value(hasItem(DEFAULT_PRICE_PER_NIGHT.intValue())))
+                .andExpect(jsonPath("$.[*].coord").value(hasItem(DEFAULT_COORD.toString())));
     }
 
     @Test
@@ -229,7 +253,8 @@ public class HotelReservationResourceIntTest {
             .andExpect(jsonPath("$.idHotel").value(DEFAULT_ID_HOTEL.toString()))
             .andExpect(jsonPath("$.checkIn").value(DEFAULT_CHECK_IN.toString()))
             .andExpect(jsonPath("$.checkOut").value(DEFAULT_CHECK_OUT.toString()))
-            .andExpect(jsonPath("$.pricePerNight").value(DEFAULT_PRICE_PER_NIGHT.intValue()));
+            .andExpect(jsonPath("$.pricePerNight").value(DEFAULT_PRICE_PER_NIGHT.intValue()))
+            .andExpect(jsonPath("$.coord").value(DEFAULT_COORD.toString()));
     }
 
     @Test
@@ -253,7 +278,8 @@ public class HotelReservationResourceIntTest {
                 .idHotel(UPDATED_ID_HOTEL)
                 .checkIn(UPDATED_CHECK_IN)
                 .checkOut(UPDATED_CHECK_OUT)
-                .pricePerNight(UPDATED_PRICE_PER_NIGHT);
+                .pricePerNight(UPDATED_PRICE_PER_NIGHT)
+                .coord(UPDATED_COORD);
 
         restHotelReservationMockMvc.perform(put("/api/hotel-reservations")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -268,6 +294,7 @@ public class HotelReservationResourceIntTest {
         assertThat(testHotelReservation.getCheckIn()).isEqualTo(UPDATED_CHECK_IN);
         assertThat(testHotelReservation.getCheckOut()).isEqualTo(UPDATED_CHECK_OUT);
         assertThat(testHotelReservation.getPricePerNight()).isEqualTo(UPDATED_PRICE_PER_NIGHT);
+        assertThat(testHotelReservation.getCoord()).isEqualTo(UPDATED_COORD);
     }
 
     @Test

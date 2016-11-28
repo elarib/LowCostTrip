@@ -36,6 +36,10 @@ public class HotelReservation implements Serializable {
     @Column(name = "price_per_night", nullable = false)
     private Long pricePerNight;
 
+    @NotNull
+    @Column(name = "coord", nullable = false)
+    private String coord;
+
     @ManyToOne
     @NotNull
     private User user;
@@ -100,6 +104,19 @@ public class HotelReservation implements Serializable {
         this.pricePerNight = pricePerNight;
     }
 
+    public String getCoord() {
+        return coord;
+    }
+
+    public HotelReservation coord(String coord) {
+        this.coord = coord;
+        return this;
+    }
+
+    public void setCoord(String coord) {
+        this.coord = coord;
+    }
+
     public User getUser() {
         return user;
     }
@@ -141,6 +158,7 @@ public class HotelReservation implements Serializable {
             ", checkIn='" + checkIn + "'" +
             ", checkOut='" + checkOut + "'" +
             ", pricePerNight='" + pricePerNight + "'" +
+            ", coord='" + coord + "'" +
             '}';
     }
 }

@@ -108,6 +108,7 @@
                                 checkIn: null,
                                 checkOut: null,
                                 pricePerNight: null,
+                                coord: null,
                                 id: null
                             };
                         }

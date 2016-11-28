@@ -4,7 +4,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.elarib.lowcosttrip.domain.HotelReservation;
 
 import com.elarib.lowcosttrip.repository.HotelReservationRepository;
-import com.elarib.lowcosttrip.service.UserService;
 import com.elarib.lowcosttrip.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +32,6 @@ public class HotelReservationResource {
     @Inject
     private HotelReservationRepository hotelReservationRepository;
 
-   @Inject 
-   private UserService userService;
-    
     /**
      * POST  /hotel-reservations : Create a new hotelReservation.
      *
@@ -52,9 +48,7 @@ public class HotelReservationResource {
         if (hotelReservation.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("hotelReservation", "idexists", "A new hotelReservation cannot already have an ID")).body(null);
         }
-        
-        
-        HotelReservation result = hotelReservationRepository.save(hotelReservation.user(userService.getUserWithAuthorities()));
+        HotelReservation result = hotelReservationRepository.save(hotelReservation);
         return ResponseEntity.created(new URI("/api/hotel-reservations/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("hotelReservation", result.getId().toString()))
             .body(result);
@@ -78,7 +72,7 @@ public class HotelReservationResource {
         if (hotelReservation.getId() == null) {
             return createHotelReservation(hotelReservation);
         }
-        HotelReservation result = hotelReservationRepository.save(hotelReservation.user(userService.getUserWithAuthorities()));
+        HotelReservation result = hotelReservationRepository.save(hotelReservation);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("hotelReservation", hotelReservation.getId().toString()))
             .body(result);
@@ -95,7 +89,7 @@ public class HotelReservationResource {
     @Timed
     public List<HotelReservation> getAllHotelReservations() {
         log.debug("REST request to get all HotelReservations");
-        List<HotelReservation> hotelReservations = hotelReservationRepository.findByUserIsCurrentUser();
+        List<HotelReservation> hotelReservations = hotelReservationRepository.findAll();
         return hotelReservations;
     }
 
