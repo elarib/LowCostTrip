@@ -14,7 +14,7 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
     
   console.log(uiGmapGoogleMapApi);
   var self = this;
-
+  
    $scope.map = { 
     control: {},
     center: {
@@ -121,7 +121,7 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
         
       $scope.reservedDone = false;
       $scope.isLoading = true;
-
+      $rootScope.reservedRestoDone=false;
 
       $scope.coord = $stateParams.coord;
       $scope.coord = $scope.coord;
@@ -192,10 +192,16 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
 
           RestaurantReservation.save(restoReserv,function(result){
             console.log(result);
-
+            $rootScope.reservedRestoDone = true;
+            updateRestoReserv(r, checkInDate);
           }, function(result){
             console.log(result);
           })
+        }
+
+        function updateRestoReserv (r, date){
+          $scope.restoName = r.name;
+          $scope.restoReservDate = date;
         }
 
 
