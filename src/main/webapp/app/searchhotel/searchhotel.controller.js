@@ -25,7 +25,6 @@
         $scope.isLoading = false;
         $scope.isLoaded = false;
         $scope.reservedDone = false;
-        searchHotel(800029889);
 
         $scope.chooseCity = function (selected) {
            

@@ -1,42 +1,49 @@
 <div class="row">
   <form name="form1" ng-submit="searchHotel()">
 
-        <div class="form-group">
-                <div class="input-group">
-                    <angucomplete-alt id="members"
-                    placeholder="Search City"
-                    pause="400"
-                    selected-object="chooseCity"
-                    remote-url="http://localhost:8080/api/suggest?cityName="
-                    remote-url-data-field="results"
-                    title-field="cityCountry"
-                    description-field="email"
-                    image-field="profilePic"
-                    input-class="form-control"
-                    field-required-class="chooseCity"
-                    field-required="true" />  
-                    <span class="input-group-btn">
-                        <button type="submit" ng-disabled="form1.$invalid" class="btn btn-default">
-                        <span class="glyphicon glyphicon-search"></span> Search</button>
-                    </span>
-                </div>
-        </div>
-
     <div class="row">
-        <div class="col-md-6">
-            <div class="input-group">
-               <input type="text" placeholder="Check In Date" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="checkInDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-              <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                </span>
+      <div class="col-md-8">
+        <div class="input-group" style=" width: 100%; ">
+          <angucomplete-alt id="members"
+          placeholder="Search City"
+          pause="400"
+          selected-object="chooseCity"
+          remote-url="http://localhost:8080/api/suggest?cityName="
+          remote-url-data-field="results"
+          title-field="cityCountry"
+          description-field="email"
+          image-field="profilePic"
+          input-class="form-control"
+          field-required-class="chooseCity"
+          field-required="true" />  
+        </div>
+      </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input type="number" class="form-control"  placeholder="Your Budget Per Night" ng-model="budgetPerNight" ng-required="true" />
+            <span class="input-group-btn">
+              <button type="submit" ng-disabled="form1.$invalid" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> Search</button>
+            </span>
           </div>
+        </div>
+    </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+           <input type="text" placeholder="Check In Date" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="checkInDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+           <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </div>
       </div>
       <div class="col-md-6">
         <div class="input-group">
-            <input type="text" class="form-control"  placeholder="Check out Date" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="checkOutDate" is-open="popup2.opened" datepicker-options="dateOptions2" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
+          <input type="text" class="form-control"  placeholder="Check out Date" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="checkOutDate" is-open="popup2.opened" datepicker-options="dateOptions2" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
         </div>
       </div>
 
@@ -50,30 +57,30 @@
 </div>
 
 <div ng-cloak>
-    <div class="row">
-     	<div class="col-md-6">
-          <div class="loader col-md-2 col-md-offset-5" ng-show="isLoading"></div>
-         <div class="panel panel-default" ng-repeat="h in vm.hotels" >
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img ng-src="{{h.image}}" alt="{{h.name}}" class="img-responsive">
-                        </div>
-                        <div class="col-md-8">
-                            <h6>{{h.name}} <span ng-show="h.starRating != 0">{{h.starRating}}<span class="glyphicon glyphicon-star"></span></span></h6>
-                            <p style="font-size: 12px;">
-                              Price : {{h.price}} <span class="glyphicon glyphicon-euro"></span>
-                            </p>
-                            <p style="font-size: 12px;"> 
-                               <span class="glyphicon glyphicon glyphicon-home"></span> {{h.address}}</br>    
-                            </p>
-                            <button class="btn btn-primary btn-xs" ng-click="reserver(h)">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                Reserve</button>
-                        </div>
-                    </div>
-                </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="loader col-md-2 col-md-offset-5" ng-show="isLoading"></div>
+      <div class="panel panel-default" ng-repeat="h in vm.hotels" >
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4">
+              <img ng-src="{{h.image}}" alt="{{h.name}}" class="img-responsive">
             </div>
+            <div class="col-md-8">
+              <h6>{{h.name}} <span ng-show="h.starRating != 0">{{h.starRating}}<span class="glyphicon glyphicon-star"></span></span></h6>
+              <p style="font-size: 12px;">
+                Price : {{h.price}} <span class="glyphicon glyphicon-euro"></span>
+              </p>
+              <p style="font-size: 12px;"> 
+               <span class="glyphicon glyphicon glyphicon-home"></span> {{h.address}}</br>    
+             </p>
+             <button class="btn btn-primary btn-xs" ng-click="reserver(h)">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              Reserve</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
    <!--      <div class="col-lg-6 col-sm-6 col-md-6" ng-repeat="h in vm.hotels" style=" min-height: 350px; ">
@@ -87,53 +94,53 @@
                       <a href="#" class="btn btn-primary" role="button">Button</a>
                   </div>
               </div>
-          </div> -->
+            </div> -->
+          </div>
+          <div class="col-md-6">
+           <div id="panel">
+            <input id="target" type="text" placeholder="Search Box" style=" display: none; ">
+            <button id="button" style=" display: none; ">click</button>
+          </div>
+          <div id="map-canvas"></div>
+          <div  ng-include="'app/searchhotel/weather.html'" ng-show="isLoaded"></div>
         </div>
-  	<div class="col-md-6">
-	  		<div id="panel">
-    				<input id="target" type="text" placeholder="Search Box" style=" display: none; ">
-    				<button id="button" style=" display: none; ">click</button>
-			  </div>
-			 <div id="map-canvas"></div>
-       <div  ng-include="'app/searchhotel/weather.html'" ng-show="isLoaded"></div>
-		</div>
 
+      </div>
     </div>
-</div>
 
-<style>
- #map-canvas {
-     height: 400px;
-     width: 500px;
- }
+    <style>
+     #map-canvas {
+       height: 400px;
+       width: 500px;
+     }
 
-#target {
-        width: 345px;
-      }
+     #target {
+      width: 345px;
+    }
 
 
-  .full button span {
-    background-color: limegreen;
-    border-radius: 32px;
-    color: black;
-  }
-  .partially button span {
-    background-color: orange;
-    border-radius: 32px;
-    color: black;
-  }
+    .full button span {
+      background-color: limegreen;
+      border-radius: 32px;
+      color: black;
+    }
+    .partially button span {
+      background-color: orange;
+      border-radius: 32px;
+      color: black;
+    }
 
-  .loader {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-}
+    .loader {
+      border: 16px solid #f3f3f3; /* Light grey */
+      border-top: 16px solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+    }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-</style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
