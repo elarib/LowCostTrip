@@ -14,6 +14,8 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
     
   console.log(uiGmapGoogleMapApi);
   var self = this;
+
+  $scope.showDirectionsList = true;
   
    $scope.map = { 
     control: {},
@@ -69,8 +71,10 @@ angular.module('lowCostTripApp').controller('modalController', ['$scope','$rootS
 
       directionsService.route(request, function (response, status) {
           console.log('directions found');
+          console.log(response);
           if (status === google.maps.DirectionsStatus.OK) {
               $scope.directionsDisplay.setDirections(response);
+              $scope.directionsDisplay.setPanel(document.getElementById('directionsList'));
           } else {
               console.log('Directions request failed due to ' + status);
           }
